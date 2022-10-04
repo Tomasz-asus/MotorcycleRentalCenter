@@ -1,4 +1,4 @@
-package com.example.motorcycleDrivingSchool.modelsDTO;
+package com.example.motorcycleDrivingSchool.DTO;
 
 import java.util.List;
 

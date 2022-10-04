@@ -19,6 +19,9 @@ public class Instructor {
     @JoinColumn(name="unavailableDays")
     private List<InstructorUnavailableDays> unavailableDays = new ArrayList<>();
 
+    public Instructor(String name, int age) {
+    }
+
     public Instructor() {
     }
 

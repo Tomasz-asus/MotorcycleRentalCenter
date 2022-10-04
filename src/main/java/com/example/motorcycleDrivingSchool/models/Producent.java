@@ -56,6 +56,10 @@ public class Producent {
         this.imgUrl = imgUrl;
     }
 
+    public List<Category> getProducentCategory() {
+        return producentCategory;
+    }
+
     @Override
     public String toString() {
         return "Category{" +

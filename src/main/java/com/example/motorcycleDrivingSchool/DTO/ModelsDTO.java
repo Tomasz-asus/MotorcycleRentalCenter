@@ -1,4 +1,4 @@
-package com.example.motorcycleDrivingSchool.modelsDTO;
+package com.example.motorcycleDrivingSchool.DTO;
 
 import java.util.List;
 
@@ -16,7 +16,12 @@ public class ModelsDTO {
 
     private final List<InstructorDTO> instructorDTOS;
 
-    public ModelsDTO(String name, String duration, double price, String description, List<RentalDTO> rentalDTO, List<InstructorDTO> instructorDTOS) {
+    public ModelsDTO(String name,
+                     String duration,
+                     double price,
+                     String description,
+                     List<RentalDTO> rentalDTO,
+                     List<InstructorDTO> instructorDTOS) {
         this.name = name;
         this.duration = duration;
         this.price = price;

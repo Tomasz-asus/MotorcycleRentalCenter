@@ -27,6 +27,9 @@ public class Category {
         this.categoryModels = categoryModels;
     }
 
+    public <R> Category(String name, R collect) {
+    }
+
     public String getName() {
         return name;
     }
