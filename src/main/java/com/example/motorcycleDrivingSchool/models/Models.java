@@ -20,6 +20,8 @@ public class Models {
 
     private String description;
 
+    private String frontId;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "fk_modelsRental")
     private List<Rental> modelsRental;
@@ -27,7 +29,7 @@ public class Models {
     @ManyToMany
     private List<Instructor> instructor;
 
-    public Models() {
+    public Models(String name, String duration, double price, String description, String frontId, List<Instructor> instructors, List<Rental> rentals) {
     }
 
     public Models(String name, String duration, double price, String description, List<Rental> modelsRental, List<Instructor> instructor) {
@@ -39,8 +41,15 @@ public class Models {
         this.instructor = instructor;
     }
 
+    public Models() {
+    }
+
     public String getName() {
         return name;
+    }
+
+    public String getFrontId() {
+        return frontId;
     }
 
     public void setName(String name) {
@@ -97,5 +106,8 @@ public class Models {
     @Override
     public int hashCode() {
         return Objects.hash(id, getName(), getDuration(), getPrice(), getDescription(), getModelsRental(), getInstructor());
+    }
+
+    public void assignInstructor(Instructor instructor) {
     }
 }

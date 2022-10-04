@@ -4,20 +4,26 @@ import java.util.List;
 
 public class ProducentDTO {
 
-    private final String name;
+    private String name;
 
-    private final String description;
+    private String description;
 
-    private final String imgUrl;
+    private String imgUrl;
 
-    private final List<CategoryDTO> producentCategory;
+    private List<CategoryDTO> producentCategory;
 
+    private  List<ModelsDTO> modelsDTOS;
 
-    public ProducentDTO(String name, String description, String imgUrl, List<CategoryDTO> producentCategory) {
+    public ProducentDTO(String name, List<ModelsDTO> modelsDTOS) {
         this.name = name;
         this.description = description;
         this.imgUrl = imgUrl;
         this.producentCategory = producentCategory;
+        this.modelsDTOS = modelsDTOS;
+    }
+
+    public List<ModelsDTO> getModelsDTOS() {
+        return modelsDTOS;
     }
 
     public String getName() {
@@ -34,15 +40,5 @@ public class ProducentDTO {
 
     public List<CategoryDTO> getProducentCategory() {
         return producentCategory;
-    }
-
-    @Override
-    public String toString() {
-        return "ProducentDTO{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", imgUrl='" + imgUrl + '\'' +
-                ", producentCategory=" + producentCategory +
-                '}';
     }
 }

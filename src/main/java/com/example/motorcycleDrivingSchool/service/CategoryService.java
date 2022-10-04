@@ -25,25 +25,7 @@ public class CategoryService {
         this.categoryRepo = categoryRepo;
     }
 
-    public List<CategoryDTO> categoryList (){
-         return categoryRepo.findAll()
-                 .stream()
-                 .map(mapper::categoryToCategoryDTO)
-                 .collect(Collectors.toList());
+    public List<ProducentDTO> getProducentDTOS(String categoryName){
+    return getProducentDTOS("Sport");
     }
-
-    public List<ProducentDTO> getCategoryDTO(String categoryName){
-    return categoryList().stream()
-            .filter(f->f.getName().equals(categoryName))
-            .findFirst()
-            .map(CategoryDTO::getProducentDTOS)
-            .get();
-    }
-
-    public CategoryDTO addCategory(CategoryDTO categoryDTO){
-        Category category = mapper.categoryDTOToCategory(categoryDTO);
-        Category save = categoryRepo.save(category);
-        return mapper.categoryToCategoryDTO(save);
-    }
-
 }

@@ -1,22 +1,24 @@
 MotorcycleShop
 
 
-Producent:.
-Yamaha
-Honda
-Suzuki
-Kawasaki
-
-Category:.
+Category:. // Workshops
 Sport
 Adventure
 Chopper
 City
 
 
-Models:.
-Yamaha R1
-Honda Affrica
-Suzuki
+                Producent:.//SubCategory
+                Yamaha
+                Honda
+                Suzuki
+                Kawasaki
+
+
+
+                                    Models:. //Training
+                                    Yamaha R1
+                                    Honda Affrica
+                                    Suzuki
 
 

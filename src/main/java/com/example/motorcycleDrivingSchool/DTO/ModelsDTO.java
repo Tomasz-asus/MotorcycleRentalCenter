@@ -12,6 +12,8 @@ public class ModelsDTO {
 
     private final String description;
 
+    private String frontId;
+
     private final List<RentalDTO> rentalDTO;
 
     private final List<InstructorDTO> instructorDTOS;
@@ -20,12 +22,14 @@ public class ModelsDTO {
                      String duration,
                      double price,
                      String description,
+                     String frontId,
                      List<RentalDTO> rentalDTO,
                      List<InstructorDTO> instructorDTOS) {
         this.name = name;
         this.duration = duration;
         this.price = price;
         this.description = description;
+        this.frontId = frontId;
         this.rentalDTO = rentalDTO;
         this.instructorDTOS = instructorDTOS;
     }
@@ -46,6 +50,10 @@ public class ModelsDTO {
         return description;
     }
 
+    public String getFrontId() {
+        return frontId;
+    }
+
     public List<RentalDTO> getRentalDTO() {
         return rentalDTO;
     }
@@ -62,5 +70,9 @@ public class ModelsDTO {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public void  assignFrontId( String modelsName, String rentalName){
+        this.frontId = modelsName + rentalName;
     }
 }

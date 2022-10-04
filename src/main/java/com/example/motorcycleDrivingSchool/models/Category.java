@@ -17,7 +17,7 @@ public class Category {
     private String description;
 
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Models> categoryModels;
+    private List<Producent> categoryProducent;
 
     public Category() {
     }
@@ -25,11 +25,11 @@ public class Category {
     public Category(String name,
                     String description,
                     String imgUrl,
-                    List<Models> categoryModels) {
+                    List<Producent> categoryProducent) {
         this.name = name;
         this.description = description;
         this.imgUrl = imgUrl;
-        this.categoryModels = categoryModels;
+        this.categoryProducent = categoryProducent;
     }
 
     public <R> Category(String name, R collect) {
@@ -59,12 +59,12 @@ public class Category {
         this.description = description;
     }
 
-    public List<Models> getCategoryModels() {
-        return categoryModels;
+    public List<Producent> getCategoryProducent() {
+        return categoryProducent;
     }
 
-    public void setCategoryModels(List<Models> categoryModels) {
-        this.categoryModels = categoryModels;
+    public void setCategoryProducent(List<Producent> categoryProducent) {
+        this.categoryProducent = categoryProducent;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Category {
         return "Category{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", categoryModels=" + categoryModels +
+                ", categoryProducent=" + categoryProducent +
                 '}';
     }
 
@@ -80,11 +80,13 @@ public class Category {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Category category)) return false;
-        return Objects.equals(id, category.id) && Objects.equals(getName(), category.getName()) && Objects.equals(getDescription(), category.getDescription()) && Objects.equals(getCategoryModels(), category.getCategoryModels());
+        return Objects.equals(id, category.id) && Objects.equals(getName(),
+                category.getName()) && Objects.equals(getDescription(),
+                category.getDescription()) && Objects.equals(getCategoryProducent(), category.getCategoryProducent());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, getName(), getDescription(), getCategoryModels());
+        return Objects.hash(id, getName(), getDescription(), getCategoryProducent());
     }
 }

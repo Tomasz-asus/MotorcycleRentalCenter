@@ -2,6 +2,7 @@ package com.example.motorcycleDrivingSchool.DTO;
 
 
 import com.example.motorcycleDrivingSchool.models.*;
+import com.sun.istack.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -9,100 +10,98 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class Mapper {
-public ProducentDTO producentToDTO(Producent producent){
-    String name = producent.getName();
-    String description = producent.getDescription();
-    String imgUrl = producent.getImgUrl();
-    List<CategoryDTO> categoryDTOList = producent.getProducentCategory()
-            .stream()
-            .map(this::categoryToCategoryDTO)
-            .collect(Collectors.toList());
-    return new ProducentDTO(name,description,imgUrl,categoryDTOList);
-}
 
-public Producent producentDTOToProducent(ProducentDTO producentDTO){
-    return new Producent(producentDTO.getName(),
-            producentDTO.getDescription(),
-            producentDTO.getImgUrl(),
-            producentDTO.getProducentCategory()
-                    .stream()
-                    .map(this::categoryDTOToCategory)
-                    .collect(Collectors.toList()));
-}
-public CategoryDTO categoryToCategoryDTO (Category category){
-    String name = category.getName();
-    List<ModelsDTO> modelsDTOList = category.getCategoryModels()
-            .stream()
-            .map(this::modelsToDTO)
-            .collect(Collectors.toList());
-    return new CategoryDTO(name, modelsDTOList);
-}
-
-public Category categoryDTOToCategory (CategoryDTO categoryDTO){
-    return new Category(categoryDTO.getName(),
-            categoryDTO.getModelsDTOS()
-                    .stream()
-                    .map(this::modelsDTOToModels)
-                    .collect(Collectors.toList()));
-}
-
-public ModelsDTO modelsToDTO(Models models){
-    String name = models.getName();
-    String duration = models.getDuration();
-    double price = models.getPrice();
-    String description = models.getDescription();
-    List<InstructorDTO> instructorDTOS = models.getInstructor()
-            .stream()
-            .map(this::instructorToDTO)
-            .collect(Collectors.toList());
-    List<RentalDTO> rentalDTO = models.getModelsRental()
-            .stream()
-            .map(this::rentalToDTO)
-            .collect(Collectors.toList());
-    return new ModelsDTO(name,duration,price,description, rentalDTO, instructorDTOS);
+    public CategoryDTO categoryToDTO(Category category){
+        String name = category.getName();
+        String descriptions = category.getDescription();
+        String imgUrl = category.getImgUrl();
+        List <ProducentDTO> list = category.getCategoryProducent()
+                .stream()
+                .map(this::producentToDTO)
+                .collect(Collectors.toList());
+        return new CategoryDTO(name,descriptions,imgUrl, list);
     }
 
-    public Models modelsDTOToModels (ModelsDTO modelsDTO){
-    return new Models(modelsDTO.getName(),
+    public Category categoryDTOToCategory(CategoryDTO categoryDTO){
+        return new Category(categoryDTO.getName(),
+                categoryDTO.getDescription(),
+                categoryDTO.getImgUrl(),
+                categoryDTO.getList()
+                        .stream()
+                        .map(this::producentDTOToProducent)
+                        .collect(Collectors.toList()));
+    }
+    public ProducentDTO producentToDTO(Producent producent){
+        String name = producent.getName();
+        List<ModelsDTO> models = producent.getModels()
+                .stream()
+                .map(this::modelsToDTO)
+                .collect(Collectors.toList());
+        return new ProducentDTO(name, models);
+    }
+    public Producent producentDTOToProducent(ProducentDTO producentDTO){
+        return new Producent(producentDTO.getName(), producentDTO.getModelsDTOS()
+                .stream()
+                .map(this::modelsDTOToModels)
+                .collect(Collectors.toList()));
+    }
+
+
+    public ModelsDTO modelsToDTO(Models models){
+        String name = models.getName();
+        double price = models.getPrice();
+        String duration = models.getDuration();
+        String description = models.getDescription();
+        String frontId = models.getFrontId();
+        List<InstructorDTO> instructor = models.getInstructor()
+                .stream()
+                .map(this::instructorToDTO)
+                .collect(Collectors.toList());
+        List<RentalDTO> rental = models.getModelsRental()
+                .stream()
+                .map(this::modelsRentalToDTO)
+                .toList();
+        return new ModelsDTO(name,duration, price,description, frontId, rental, instructor);
+        }
+
+        public Models modelsDTOToModels(ModelsDTO modelsDTO){
+        return new Models(modelsDTO.getName(),
                 modelsDTO.getDuration(),
                 modelsDTO.getPrice(),
                 modelsDTO.getDescription(),
-            modelsDTO.getRentalDTO()
+                modelsDTO.getFrontId(),
+                modelsDTO.getInstructorDTOS()
                         .stream()
-                        .map(this::rentalDTOToRental)
+                        .map(this::instructorDTOToInstructor)
                         .toList(),
-            modelsDTO.getInstructorDTOS()
+                modelsDTO.getRentalDTO()
                         .stream()
-                        .map(this::instructorDTOS)
+                        .map(this::modelsRentalDTOToModelsRental)
                         .toList());
     }
 
-    public InstructorDTO instructorToDTO(Instructor instructor){
-    String name = instructor.getName();
-    int age = instructor.getAge();
-    List<LocalDate> unavailableDays = instructor.getUnavailableDays()
-            .stream()
-            .map(InstructorUnavailableDays::getUnavailableDay)
-            .collect(Collectors.toList());
-    return new InstructorDTO(name,age,unavailableDays);
+    public InstructorDTO instructorToDTO( Instructor instructor){
+        String name = instructor.getName();
+        int age = instructor.getAge();
+        List<LocalDate> unavailableDays = instructor.getUnavailableDays().stream()
+                .map(InstructorUnavailableDays::getUnavailableDay)
+                .toList();
+        return new InstructorDTO(name,age,unavailableDays);
     }
-
-    public Instructor instructorDTOS (InstructorDTO instructorDTO){
-    return new Instructor(instructorDTO.getName(),
-            instructorDTO.getAge());
+    public Instructor instructorDTOToInstructor(InstructorDTO instructorDTO){
+        return new Instructor(instructorDTO.getName(),
+                instructorDTO.getAge());
     }
-
-    public RentalDTO rentalToDTO(Rental rental){
-    LocalDate startRental = rental.getStartRental();
-    LocalDate endRental = rental.getEndRental();
-    return new RentalDTO(startRental,endRental);
+    public RentalDTO modelsRentalToDTO(Rental rental ){
+        LocalDate startRental = rental.getStartRental();
+        LocalDate endRental = rental.getEndRental();
+        return new RentalDTO(startRental,endRental);
     }
-
-    public Rental rentalDTOToRental(RentalDTO rentalDTO){
-    return new Rental(rentalDTO.getStartRental(),
-            rentalDTO.getEndRental());
+    public Rental modelsRentalDTOToModelsRental(RentalDTO rentalDTO){
+        return new Rental(rentalDTO.getStartRental(),
+                rentalDTO.getEndRental());
     }
-
 }
+
 
 

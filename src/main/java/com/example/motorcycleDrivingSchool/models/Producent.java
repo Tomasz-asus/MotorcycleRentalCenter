@@ -1,7 +1,11 @@
 package com.example.motorcycleDrivingSchool.models;
 
 
+import com.sun.mail.imap.Rights;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,25 +20,37 @@ public class Producent {
     private String description;
 
     private String imgUrl;
-
+    private String models;
 
     public Producent() {
     }
 
-    public Producent(String name, String description, String imgUrl, List<Category> producentCategory) {
+    public Producent(String name,
+                     String description,
+                     String imgUrl,
+                     List<Category> producentCategory,
+                     String models) {
         this.name = name;
         this.description = description;
         this.imgUrl = imgUrl;
         this.producentCategory = producentCategory;
+        this.models = models;
     }
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "fk_producentCategory")
     private List<Category> producentCategory;
 
+    public <R> Producent(String name, String description, String imgUrl, R collect) {
+    }
+
+    public <R> Producent(String name, R collect) {
+    }
+
     public String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         this.name = name;
@@ -56,8 +72,8 @@ public class Producent {
         this.imgUrl = imgUrl;
     }
 
-    public List<Category> getProducentCategory() {
-        return producentCategory;
+    public List<Models> getModels() {
+        return Collections.unmodifiableList(getModels());
     }
 
     @Override
@@ -65,6 +81,7 @@ public class Producent {
         return "Category{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", models='" + models + '\''+
                 '}';
     }
 
@@ -77,7 +94,8 @@ public class Producent {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, getName(), getDescription(), getImgUrl(), producentCategory);
+        return Objects.hash(id, getName(), getDescription(), getImgUrl(), producentCategory, models);
     }
+
 }
 

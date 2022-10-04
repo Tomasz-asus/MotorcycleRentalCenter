@@ -63,4 +63,8 @@ public class Instructor {
                 ", unavailableDays=" + unavailableDays +
                 '}';
     }
+
+    public void assignUnavailableDays(InstructorUnavailableDays instructorUnavailableDays) {
+
+    }
 }
