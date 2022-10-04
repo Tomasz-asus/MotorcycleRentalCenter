@@ -1,18 +1,22 @@
 MotorcycleShop
 
+
+Producent:.
+Yamaha
+Honda
+Suzuki
+Kawasaki
+
 Category:.
 Sport
 Adventure
 Chopper
 City
 
-Producent:.
-Yamaha
-Honda
-Suzuki
-BMW
 
 Models:.
-
+Yamaha R1
+Honda Affrica
+Suzuki
 
 

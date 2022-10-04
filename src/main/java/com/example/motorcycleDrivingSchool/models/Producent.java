@@ -2,11 +2,13 @@ package com.example.motorcycleDrivingSchool.models;
 
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
-public class Category {
+public class Producent {
     @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String name;
@@ -16,14 +18,19 @@ public class Category {
     private String imgUrl;
 
 
-    public Category() {
+    public Producent() {
     }
 
-    public Category(String name, String description, String imgUrl) {
+    public Producent(String name, String description, String imgUrl, List<Category> producentCategory) {
         this.name = name;
         this.description = description;
         this.imgUrl = imgUrl;
+        this.producentCategory = producentCategory;
     }
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "fk_producentCategory")
+    private List<Category> producentCategory;
 
     public String getName() {
         return name;
@@ -58,12 +65,15 @@ public class Category {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Producent producent)) return false;
+        return id == producent.id && Objects.equals(getName(), producent.getName()) && Objects.equals(getDescription(), producent.getDescription()) && Objects.equals(getImgUrl(), producent.getImgUrl()) && Objects.equals(producentCategory, producent.producentCategory);
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(id, getName(), getDescription(), getImgUrl(), producentCategory);
     }
 }
+

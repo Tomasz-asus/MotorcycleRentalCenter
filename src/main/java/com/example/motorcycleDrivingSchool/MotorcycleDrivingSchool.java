@@ -1,13 +1,13 @@
-package com.example.motorcycleshop;
+package com.example.motorcycleDrivingSchool;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MotorcycleShopApplication {
+public class MotorcycleDrivingSchool {
 
     public static void main(String[] args) {
-        SpringApplication.run(MotorcycleShopApplication.class, args);
+        SpringApplication.run(MotorcycleDrivingSchool.class, args);
     }
 
 }
