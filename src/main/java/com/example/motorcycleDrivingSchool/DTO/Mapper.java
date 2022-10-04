@@ -2,11 +2,12 @@ package com.example.motorcycleDrivingSchool.DTO;
 
 
 import com.example.motorcycleDrivingSchool.models.*;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Component
 public class Mapper {
 public ProducentDTO producentToDTO(Producent producent){
     String name = producent.getName();

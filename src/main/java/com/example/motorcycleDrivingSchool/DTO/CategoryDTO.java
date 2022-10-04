@@ -4,13 +4,14 @@ import java.util.List;
 
 public class CategoryDTO {
 
-    private String name;
-
-    private final List<ModelsDTO> modelsDTOS;
+    private final String name;
+    private List<ProducentDTO> producentDTOS;
+    private List<ModelsDTO> modelsDTOS;
 
     public CategoryDTO(String name, List<ModelsDTO> modelsDTOS) {
         this.name = name;
         this.modelsDTOS = modelsDTOS;
+        this.producentDTOS = producentDTOS;
     }
 
     public String getName() {
@@ -21,14 +22,15 @@ public class CategoryDTO {
         return modelsDTOS;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public List<ProducentDTO> getProducentDTOS() {
+        return producentDTOS;
     }
 
     @Override
     public String toString() {
         return "CategoryDTO{" +
                 "name='" + name + '\'' +
+                ", producentDTOS=" + producentDTOS +
                 ", modelsDTOS=" + modelsDTOS +
                 '}';
     }

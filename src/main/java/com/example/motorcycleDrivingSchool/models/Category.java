@@ -13,6 +13,7 @@ public class Category {
 
     private String name;
 
+    private String imgUrl;
     private String description;
 
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -21,9 +22,13 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name, String description, List<Models> categoryModels) {
+    public Category(String name,
+                    String description,
+                    String imgUrl,
+                    List<Models> categoryModels) {
         this.name = name;
         this.description = description;
+        this.imgUrl = imgUrl;
         this.categoryModels = categoryModels;
     }
 
@@ -36,6 +41,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getDescription() {
