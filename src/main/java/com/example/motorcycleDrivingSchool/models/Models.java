@@ -108,6 +108,9 @@ public class Models {
         return Objects.hash(id, getName(), getDuration(), getPrice(), getDescription(), getModelsRental(), getInstructor());
     }
 
-    public void assignInstructor(Instructor instructor) {
+    public void assignInstructor(Instructor instructor) {this.instructor.add(instructor);
+    }
+    public void assignRental(Rental rental){
+        this.modelsRental.add(rental);
     }
 }

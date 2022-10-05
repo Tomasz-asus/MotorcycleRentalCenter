@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface ModelsRepo extends JpaRepository<Models, Long> {
-    Optional<Object> findByFrontId(String instructorId);
+ //   Optional<Object> findByFrontId(String instructorId);
+    Optional<Models> findByName(String instructorId);
+    Optional<Models> findByFrontId(String id);
 
 }

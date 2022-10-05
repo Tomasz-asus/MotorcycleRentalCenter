@@ -1,10 +1,8 @@
 package com.example.motorcycleDrivingSchool.models;
 
 
-import com.sun.mail.imap.Rights;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -20,29 +18,12 @@ public class Producent {
     private String description;
 
     private String imgUrl;
-    private String models;
-
     public Producent() {
     }
 
-    public Producent(String name,
-                     String description,
-                     String imgUrl,
-                     List<Category> producentCategory,
-                     String models) {
-        this.name = name;
-        this.description = description;
-        this.imgUrl = imgUrl;
-        this.producentCategory = producentCategory;
-        this.models = models;
-    }
-
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "fk_producentCategory")
-    private List<Category> producentCategory;
-
-    public <R> Producent(String name, String description, String imgUrl, R collect) {
-    }
+    @JoinColumn(name = "fk_models")
+    private List<Models> models;
 
     public <R> Producent(String name, R collect) {
     }
@@ -50,7 +31,6 @@ public class Producent {
     public String getName() {
         return name;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -60,20 +40,8 @@ public class Producent {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getImgUrl() {
         return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public List<Models> getModels() {
-        return Collections.unmodifiableList(getModels());
     }
 
     @Override
@@ -81,21 +49,24 @@ public class Producent {
         return "Category{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", models='" + models + '\''+
+                ", models='" + models + '\'' +
                 '}';
+    }
+    public List<Models> getModels(){
+        return Collections.unmodifiableList(models);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Producent producent)) return false;
-        return id == producent.id && Objects.equals(getName(), producent.getName()) && Objects.equals(getDescription(), producent.getDescription()) && Objects.equals(getImgUrl(), producent.getImgUrl()) && Objects.equals(producentCategory, producent.producentCategory);
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, getName(), getDescription(), getImgUrl(), producentCategory, models);
+        return Objects.hash(id, getName(), getDescription(), getImgUrl(), models);
+    }
+
+    public void assignTypeOfModels(Models models) {
     }
 
 }
-

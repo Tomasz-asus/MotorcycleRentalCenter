@@ -40,8 +40,8 @@ public class RuntimeExceptionHandler {
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = {InstructorIsNotExist.class})
-    public ResponseEntity<ErrorMessage> handleTrainerIsNotExist(InstructorIsNotExist ex) {
+    @ExceptionHandler(value = {InstructorNotExist.class})
+    public ResponseEntity<ErrorMessage> handleTrainerIsNotExist(InstructorNotExist ex) {
         ErrorMessage errorMessage = new ErrorMessage();
         errorMessage.setStatusCode(HttpStatus.NOT_FOUND.value());
         errorMessage.setMessage(ex.getMessage());

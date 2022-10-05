@@ -1,8 +1,8 @@
 package com.example.motorcycleDrivingSchool.Exceptions;
 
-public class InstructorIsNotExist extends RuntimeException{
+public class InstructorNotExist extends RuntimeException{
 
-    public InstructorIsNotExist(){
+    public InstructorNotExist(){
         super(" Instructor not exist");
     }
 }
