@@ -12,7 +12,7 @@ public class Instructor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String Name;
+    private String name;
     private int Age;
 
     @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
@@ -26,17 +26,17 @@ public class Instructor {
     }
 
     public Instructor(String name, int age, List<InstructorUnavailableDays> unavailableDays) {
-        Name = name;
+        this.name = name;
         Age = age;
         this.unavailableDays = unavailableDays;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public int getAge() {
@@ -58,7 +58,7 @@ public class Instructor {
     @Override
     public String toString() {
         return "Instructor{" +
-                "Name='" + Name + '\'' +
+                "Name='" + name + '\'' +
                 ", Age=" + Age +
                 ", unavailableDays=" + unavailableDays +
                 '}';
