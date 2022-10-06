@@ -105,7 +105,7 @@ public ModelsDTO addModels(ModelsDTO modelsDTO,
         instructorRepo.save(instructor);
     }
 
-    public void addPeriod(RentalDTO rentalDTO,
+    public void addRental(RentalDTO rentalDTO,
                           String modelId) {
 
             Models models = modelsRepo.findByFrontId(modelId)
@@ -125,16 +125,16 @@ public ModelsDTO addModels(ModelsDTO modelsDTO,
         }
     }
 
-    public void addPeriodAndInstructor(PeriodAndInstructorAssignDTO periodAndInstructorAssignDTO,
+    public void addPeriodAndInstructor(RentalAndInstructorAssignDTO rentalAndInstructorAssignDTO,
                                        String periodId) {
-        addPeriod(periodAndInstructorAssignDTO.getRentalDTO(), periodId);
+        addRental(rentalAndInstructorAssignDTO.getRentalDTO(), periodId);
         Models models = modelsRepo.findByFrontId(periodId).orElseThrow();
         ModelsDTO modelsDTO= mapper.modelsToDTO(models);
-        instructorService.addInstructor(periodAndInstructorAssignDTO.getInstructorDTO());
+        instructorService.addInstructor(rentalAndInstructorAssignDTO.getInstructorDTO());
 
-        instructorService.assignUnavailableDays(periodAndInstructorAssignDTO.getRentalDTO(),
-                periodAndInstructorAssignDTO.getInstructorDTO().getName());
-        InstructorAssignmentDTO instructorAssignmentDTO = new InstructorAssignmentDTO(periodAndInstructorAssignDTO.getInstructorDTO().getName(), modelsDTO.getName());
+        instructorService.assignUnavailableDays(rentalAndInstructorAssignDTO.getRentalDTO(),
+                rentalAndInstructorAssignDTO.getInstructorDTO().getName());
+        InstructorAssignmentDTO instructorAssignmentDTO = new InstructorAssignmentDTO(rentalAndInstructorAssignDTO.getInstructorDTO().getName(), modelsDTO.getName());
         addInstructorToModels(instructorAssignmentDTO);
     }
 }

@@ -7,7 +7,7 @@ public class RentalDTO {
 
     private LocalDate endRental;
 
-    public RentalDTO() {
+    public RentalDTO(LocalDate of) {
     }
 
     public RentalDTO(LocalDate startRental, LocalDate endRental) {

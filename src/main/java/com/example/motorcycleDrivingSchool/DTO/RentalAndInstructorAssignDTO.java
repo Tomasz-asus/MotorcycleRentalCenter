@@ -1,10 +1,10 @@
 package com.example.motorcycleDrivingSchool.DTO;
 
-public class PeriodAndInstructorAssignDTO {
+public class RentalAndInstructorAssignDTO {
     private final RentalDTO rentalDTO;
     private final InstructorDTO instructorDTO;
 
-    public PeriodAndInstructorAssignDTO(RentalDTO rentalDTO,
+    public RentalAndInstructorAssignDTO(RentalDTO rentalDTO,
                                         InstructorDTO instructorDTO) {
         this.rentalDTO = rentalDTO;
         this.instructorDTO = instructorDTO;

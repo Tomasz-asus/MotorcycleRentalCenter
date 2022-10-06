@@ -5,23 +5,19 @@ import java.util.List;
 
 public class InstructorDTO {
 
-    private final String name;
-    private final int Age;
-    private final List<LocalDate> unavailableDays;
+    private  String name;
+
+    private  List<LocalDate> unavailableDays;
 
 
-    public InstructorDTO(String name, int age, List<LocalDate> unavailableDays) {
+    public InstructorDTO(String name) {
         this.name = name;
-        Age = age;
         this.unavailableDays = unavailableDays;
     }
 
+
     public String getName() {
         return name;
-    }
-
-    public int getAge() {
-        return Age;
     }
 
     public List<LocalDate> getUnavailableDays() {

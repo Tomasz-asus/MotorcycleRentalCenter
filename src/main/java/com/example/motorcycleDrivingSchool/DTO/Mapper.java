@@ -2,9 +2,7 @@ package com.example.motorcycleDrivingSchool.DTO;
 
 
 import com.example.motorcycleDrivingSchool.models.*;
-import com.sun.istack.NotNull;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,15 +80,13 @@ public class Mapper {
 
     public InstructorDTO instructorToDTO( Instructor instructor){
         String name = instructor.getName();
-        int age = instructor.getAge();
         List<LocalDate> unavailableDays = instructor.getUnavailableDays().stream()
                 .map(InstructorUnavailableDays::getUnavailableDay)
                 .toList();
-        return new InstructorDTO(name,age,unavailableDays);
+        return new InstructorDTO(name);
     }
     public Instructor instructorDTOToInstructor(InstructorDTO instructorDTO){
-        return new Instructor(instructorDTO.getName(),
-                instructorDTO.getAge());
+        return new Instructor(instructorDTO.getName());
     }
     public RentalDTO modelsRentalToDTO(Rental rental ){
         LocalDate startRental = rental.getStartRental();

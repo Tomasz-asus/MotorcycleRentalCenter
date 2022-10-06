@@ -1,6 +1,7 @@
 package com.example.motorcycleDrivingSchool.models;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,8 +17,12 @@ public class Category {
     private String imgUrl;
     private String description;
 
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name="fk_category")
     private List<Producent> categoryProducent;
+
+    public Category(String sport, String description, String imgUrl) {
+    }
 
     public Category() {
     }
@@ -60,7 +65,7 @@ public class Category {
     }
 
     public List<Producent> getCategoryProducent() {
-        return categoryProducent;
+        return Collections.unmodifiableList(categoryProducent);
     }
 
     public void setCategoryProducent(List<Producent> categoryProducent) {
@@ -89,4 +94,10 @@ public class Category {
     public int hashCode() {
         return Objects.hash(id, getName(), getDescription(), getCategoryProducent());
     }
+
+
+public void assignProducent (Producent producent){
+        this.categoryProducent.add(producent);
+}
+
 }

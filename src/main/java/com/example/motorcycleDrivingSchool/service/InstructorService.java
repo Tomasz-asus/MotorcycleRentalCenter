@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.stream.LongStream;
 
 @Service
@@ -43,5 +44,17 @@ public class InstructorService {
                 .mapToObj(i -> new InstructorUnavailableDays(startRental.plusDays(i)))
                 .forEach(instructor::assignUnavailableDays);
         instructorRepo.save(instructor);
+    }
+
+    public List<InstructorDTO> showAllInstructor() {
+    return showAllInstructor();
+    }
+
+    public List<LocalDate> getUnavailableDays(String instructorName) {
+        return getUnavailableDays();
+    }
+
+    private List<LocalDate> getUnavailableDays() {
+        return getUnavailableDays();
     }
 }

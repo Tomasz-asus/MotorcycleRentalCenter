@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/")
 public class CategoryController {
     private final CategoryService categoryService;
     private final ProducentService producentService;
     private final ModelService modelService;
-
     public CategoryController(CategoryService categoryService,
                               ProducentService producentService,
                               ModelService modelService) {
@@ -27,9 +28,10 @@ public class CategoryController {
     }
     @GetMapping("/category")
     @ResponseBody
-    public List<CategoryDTO> getCategory(){
+    public List<CategoryDTO> getCategoryProducent(){
         return categoryService.categoryList();
     }
+
     @PostMapping("/category")
     @ResponseBody
     public CategoryDTO createCategory(
@@ -38,7 +40,8 @@ public class CategoryController {
     }
     @GetMapping("category/{categoryName}/producent")
     @ResponseBody
-    public List<ProducentDTO> getCategory(@PathVariable String categoryName){
+    public List<ProducentDTO> getCategoryProducent(@PathVariable
+                                                       String categoryName){
         return categoryService.getProducentDTOS(categoryName);
     }
     @PostMapping("category/{categoryName}/producent")
@@ -65,15 +68,15 @@ public class CategoryController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("category/periodAssignment/{modelsId}")
-    public ResponseEntity<Void> addPeriod(@RequestBody RentalDTO rentalDTO,
+    public ResponseEntity<Void> addRental(@RequestBody RentalDTO rentalDTO,
                                           @PathVariable String modelsId){
-        modelService.addPeriod(rentalDTO, modelsId);
+        modelService.addRental(rentalDTO, modelsId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("category/{categoryName}/producent/{producentName}/models/{modelsId}/assignPeriodAndInstructor")
-    public ResponseEntity<Void> assignPeriodAndTInstructorToModels(@RequestBody PeriodAndInstructorAssignDTO periodAndInstructorAssignDTO,
-                                                                   @PathVariable String modelsId){
-        modelService.addPeriodAndInstructor(periodAndInstructorAssignDTO, modelsId);
+    public ResponseEntity<Void> assignRentalAndInstructorToModels(@RequestBody RentalAndInstructorAssignDTO rentalAndInstructorAssignDTO,
+                                                                  @PathVariable String modelsId){
+        modelService.addPeriodAndInstructor(rentalAndInstructorAssignDTO, modelsId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
