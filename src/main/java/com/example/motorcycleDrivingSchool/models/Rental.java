@@ -9,29 +9,21 @@ import java.time.LocalDate;
 
 @Entity
 public class Rental {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private LocalDate startRental;
-
     private LocalDate endRental;
-
     public Rental() {
     }
-
     public Rental(LocalDate startRental, LocalDate endRental) {
         this.startRental = startRental;
         this.endRental = endRental;
     }
-
     public LocalDate getStartRental() {
         return startRental;
     }
-
     public LocalDate getEndRental() {
         return endRental;
     }
-
-
 }

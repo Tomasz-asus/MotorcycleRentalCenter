@@ -9,12 +9,10 @@ public class DummyMailSender implements MailSender {
     public DummyMailSender(Mails mails) {
         this.mails = mails;
     }
-
     @Override
     public void send(SimpleMailMessage simpleMessage) throws MailException {
-
+        mails.add(simpleMessage);
     }
-
     @Override
     public void send(SimpleMailMessage... simpleMessages) throws MailException {
 

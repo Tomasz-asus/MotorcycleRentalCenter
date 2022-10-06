@@ -11,7 +11,6 @@ import java.util.Properties;
 
 @Configuration
 public class MailConfiguration {
-
     @Bean
     @Profile("prod")
     public MailSender mailSender(){
@@ -26,7 +25,6 @@ public class MailConfiguration {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
-
         return mailSender;
     }
     @Bean
@@ -34,8 +32,6 @@ public class MailConfiguration {
     public MailSender dummyMailSender (Mails mails){
         return new DummyMailSender(mails);
     }
-
-
     @Bean
     @Profile("!prod")
     public Mails mails(){

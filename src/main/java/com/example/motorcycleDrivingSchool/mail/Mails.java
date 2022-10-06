@@ -10,7 +10,6 @@ public class Mails {
     private final List<SimpleMailMessage> simpleMailMessages = new ArrayList<>();
     public void add(SimpleMailMessage simpleMailMessage){
         simpleMailMessages.add(simpleMailMessage);}
-
     public boolean containsMessageWith(String instructorName){
         return simpleMailMessages
                 .stream()

@@ -22,14 +22,10 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class ProducentService {
-
     private final Mapper mapper;
-
     private final CategoryRepo categoryRepo;
     private final ProducentRepo producentRepo;
     private final ModelsRepo modelsRepo;
-
-
     public ProducentService(Mapper mapper,
                             CategoryRepo categoryRepo,
                             ProducentRepo producentRepo,
@@ -44,7 +40,7 @@ public class ProducentService {
                 .map(mapper::producentToDTO)
                 .collect(Collectors.toList());
     }
-public List<ModelsDTO> getModelsDTOS(String producentName,
+    public List<ModelsDTO> getModelsDTOS(String producentName,
                                      String categoryName){
         List<Models> modelsList = categoryRepo
                 .findByName(categoryName)
@@ -59,7 +55,6 @@ public List<ModelsDTO> getModelsDTOS(String producentName,
                 .map(mapper::modelsToDTO)
                 .toList();
 }
-
 public ProducentDTO addCategory(ProducentDTO producentDTO, String categoryName){
         if (categoryRepo.findByName(categoryName).isEmpty()){
             throw new CategoryNotExist();
@@ -75,5 +70,4 @@ public ProducentDTO addCategory(ProducentDTO producentDTO, String categoryName){
         categoryRepo.save(category);
         return mapper.producentToDTO(save1);
 }
-
 }

@@ -12,21 +12,18 @@ import com.example.motorcycleDrivingSchool.repository.InstructorRepo;
 import com.example.motorcycleDrivingSchool.repository.ModelsRepo;
 import com.example.motorcycleDrivingSchool.repository.ProducentRepo;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 
 @Service
 @Transactional
 public class ModelService {
-
     private final Mapper mapper;
     private final ProducentRepo producentRepo;
     private final ModelsRepo modelsRepo;
     private final CategoryRepo categoryRepo;
     private final InstructorRepo instructorRepo;
     private final InstructorService instructorService;
-
     public ModelService(Mapper mapper,
                         ProducentRepo producentRepo,
                         ModelsRepo modelsRepo,
@@ -40,30 +37,23 @@ public class ModelService {
         this.instructorRepo = instructorRepo;
         this.instructorService = instructorService;
     }
-
 public ModelsDTO addModels(ModelsDTO modelsDTO,
                            String producentName){
     Producent producent=producentRepo.findByName(producentName)
             .orElseThrow(ProducentNotExist::new);
-
     isNameOfModelsExist(modelsDTO, producent);
         modelsDTO.assignFrontId(modelsDTO.getName(), producentName);
         Models models = mapper.modelsDTOToModels(modelsDTO);
         Models saveToRepo = modelsRepo.save(models);
         producent.assignTypeOfModels(saveToRepo);
         producentRepo.save(producent);
-
         return mapper.modelsToDTO(saveToRepo);
-
     }
-
     public void addInstructorToModels(InstructorAssignmentDTO instructorAssignmentDTO){
-
         Instructor instructor = (Instructor) instructorRepo.findByName(instructorAssignmentDTO.getInstructorName())
                 .orElseThrow(InstructorNotExist::new);
         Models models = (Models) modelsRepo.findByFrontId(instructorAssignmentDTO.getInstructorId())
                 .orElseThrow(ModelsNotExist::new);
-
         isInstructorAssigned(instructorAssignmentDTO, models);
         assignInstructor(instructor, models);
         modelsRepo.save(models);
@@ -88,7 +78,6 @@ public ModelsDTO addModels(ModelsDTO modelsDTO,
             throw new InstructorIsAssigned();
         }
     }
-
     public void assignUnavailableDaysByDuration(LocalDate periodStart, double duration, String instructorName) {
         Instructor instructor = (Instructor) instructorRepo.findByName(instructorName).orElseThrow();
         int traingDays = duration % 8 > 0 ? (int) duration / 8 + 1: (int) duration / 8;
@@ -104,18 +93,14 @@ public ModelsDTO addModels(ModelsDTO modelsDTO,
         }
         instructorRepo.save(instructor);
     }
-
     public void addRental(RentalDTO rentalDTO,
                           String modelId) {
-
             Models models = modelsRepo.findByFrontId(modelId)
                     .orElseThrow(ModelsNotExist::new);
-
         isPeriodExist(rentalDTO, models);
         models.assignRental(mapper.modelsRentalDTOToModelsRental(rentalDTO));
             modelsRepo.save(models);
     }
-
     private void isPeriodExist(RentalDTO rentalDTO, Models models) {
         if (models.getModelsRental()
                 .stream()
@@ -124,14 +109,12 @@ public ModelsDTO addModels(ModelsDTO modelsDTO,
             throw new RentalPeriodExist();
         }
     }
-
     public void addPeriodAndInstructor(RentalAndInstructorAssignDTO rentalAndInstructorAssignDTO,
                                        String periodId) {
         addRental(rentalAndInstructorAssignDTO.getRentalDTO(), periodId);
         Models models = modelsRepo.findByFrontId(periodId).orElseThrow();
         ModelsDTO modelsDTO= mapper.modelsToDTO(models);
         instructorService.addInstructor(rentalAndInstructorAssignDTO.getInstructorDTO());
-
         instructorService.assignUnavailableDays(rentalAndInstructorAssignDTO.getRentalDTO(),
                 rentalAndInstructorAssignDTO.getInstructorDTO().getName());
         InstructorAssignmentDTO instructorAssignmentDTO = new InstructorAssignmentDTO(rentalAndInstructorAssignDTO.getInstructorDTO().getName(), modelsDTO.getName());

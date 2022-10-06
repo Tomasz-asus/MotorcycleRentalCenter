@@ -48,7 +48,7 @@ public class Mapper {
     public ModelsDTO modelsToDTO(Models models){
         String name = models.getName();
         double price = models.getPrice();
-        String duration = models.getDuration();
+        double duration = models.getDuration();
         String description = models.getDescription();
         String frontId = models.getFrontId();
         List<InstructorDTO> instructor = models.getInstructor()
@@ -68,7 +68,7 @@ public class Mapper {
                 modelsDTO.getPrice(),
                 modelsDTO.getDescription(),
                 modelsDTO.getFrontId(),
-                modelsDTO.getInstructorDTOS()
+                modelsDTO.getInstructor()
                         .stream()
                         .map(this::instructorDTOToInstructor)
                         .toList(),

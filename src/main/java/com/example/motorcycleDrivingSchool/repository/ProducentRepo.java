@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface ProducentRepo extends JpaRepository<Producent, Long> {
 
     Optional<Producent> findByName(String name);
+
+
 }
