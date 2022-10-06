@@ -38,35 +38,10 @@ public class DBprod implements CommandLineRunner {
         Category chopper = new Category("Chopper", "description Chopper", "Chopper imgUrl");
         Category city = new Category("City", "description City", "City imgUrl");
 
-        Category sports = categoryRepo.save(sport);
+        Category sportCategory = categoryRepo.save(sport);
         categoryRepo.save(adventure);
         categoryRepo.save(chopper);
         categoryRepo.save(city);
-/*
-        Producent yamaha = new Producent("Yamaha", new ArrayList<>());
-        Producent honda = new Producent("Honda", new ArrayList<>());
-        Producent suzuki = new Producent("Suzuki", new ArrayList<>());
-        Producent kawasaki = new Producent("Kawasaki", new ArrayList<>());
-
-        Producent yamahaProducent = producentRepo.save(yamaha);
-        producentRepo.save(honda);
-        producentRepo.save(suzuki);
-        producentRepo.save(kawasaki);
-        producentRepo.findAll()
-                .forEach(sports::assignProducent);
-        categoryRepo.save(sports);
-
-        Models basic = new Models("Basic", 3800, 150, "description", "frontId");
-        Models adV = new Models("advanture", 3800, 150, "description", "frontId");
-        Models ci = new Models("city", 3800, 150, "description", "frontId");
-
-        modelsRepo.save(basic);
-        modelsRepo.save(adV);
-        modelsRepo.save(ci);
-
-        modelsRepo.findAll()
-                .forEach(yamahaProducent::assignTypeOfModels);
-        producentRepo.save(yamahaProducent);
-    }*/
     }
 }
+

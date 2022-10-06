@@ -5,29 +5,34 @@ import java.util.List;
 
 public class ModelsDTO {
 
-    private final String name;
-    private final double duration;
-    private final double price;
-    private final String description;
+    private String name;
+    private double duration;
+    private double price;
+    private String description;
     private String frontId;
-    private final List<RentalDTO> rentalDTO;
-    private final List<InstructorDTO> instructor;
+    private List<InstructorDTO> instructor;
+    private List<RentalDTO> rentalDTO;
 
     public ModelsDTO(String name,
                      double duration,
                      double price,
                      String description,
                      String frontId,
-                     List<RentalDTO> rentalDTO,
-                     List<InstructorDTO> instructor) {
+                     List<InstructorDTO> instructor,
+                     List<RentalDTO> rentalDTO) {
         this.name = name;
         this.duration = duration;
         this.price = price;
         this.description = description;
         this.frontId = frontId;
-        this.rentalDTO = rentalDTO;
         this.instructor = instructor;
+        this.rentalDTO = rentalDTO;
     }
+
+    public ModelsDTO(String jjj, int duration, int price, String jj, String k, List<InstructorDTO> ff, List<RentalDTO> rentalDTO, List<RentalDTO> rentalDTO1) {
+    }
+
+
     public String getName() {
         return name;
     }

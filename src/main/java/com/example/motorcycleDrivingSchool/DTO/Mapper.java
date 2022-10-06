@@ -59,7 +59,7 @@ public class Mapper {
                 .stream()
                 .map(this::modelsRentalToDTO)
                 .toList();
-        return new ModelsDTO(name,duration, price,description, frontId, rental, instructor);
+        return new ModelsDTO(name,duration, price,description, frontId, instructor,rental);
         }
 
         public Models modelsDTOToModels(ModelsDTO modelsDTO){
