@@ -1,14 +1,14 @@
-MotorcycleShop
+MotorcycleRentalCenter
 
 
-Category:. // Workshops
+Category:.
 Sport
 Adventure
 Chopper
 City
 
 
-                Producent:.//SubCategory
+                Producent:.
                 Yamaha
                 Honda
                 Suzuki
@@ -16,9 +16,9 @@ City
 
 
 
-                                    Models:. //Training
-                                    Yamaha R1
-                                    Honda Affrica
+                                    Models:.
+                                    Yamaha
+                                    Honda
                                     Suzuki
 
 
