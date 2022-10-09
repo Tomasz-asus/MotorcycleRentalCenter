@@ -60,7 +60,7 @@ public class InstructorControllerTest {
     }
 
     @Test
-    public void InstructorIsNotExist() throws Exception {
+    public void InstructorNotExist() throws Exception {
         // given
         String modelsName = "City";
         aModelsWithName(modelsName);

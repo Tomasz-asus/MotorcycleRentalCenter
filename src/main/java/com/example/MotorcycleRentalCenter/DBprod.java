@@ -77,7 +77,7 @@ public class DBprod implements CommandLineRunner {
                 LocalDate.of(2022,10,10),
                 LocalDate.of(2022,10,20));
 
-        OfferDTO offerDTO = new OfferDTO("cc@qmail.com", //TODO create email
+        OfferDTO offerDTO = new OfferDTO("educationsample00@gmail.com",
                 List.of(new ModelsDTO("BasicYamaha",
                         1.00,
                         2.00,

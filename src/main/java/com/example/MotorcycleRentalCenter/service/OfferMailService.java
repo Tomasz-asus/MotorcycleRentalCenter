@@ -19,7 +19,7 @@ public class OfferMailService {
 
     public void prepareOffer(OfferDTO offerDTO) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("cc@gmail.com");//TODO
+        simpleMailMessage.setFrom("educationsample00@gmail.com");
         simpleMailMessage.setTo(offerDTO.getEmail());
         simpleMailMessage.setSubject(subject());
         simpleMailMessage.setText(message(offerDTO));
@@ -28,7 +28,7 @@ public class OfferMailService {
 
     private String subject(){
         return """
-                Your offer from Inqoo - %s training
+                Your offer from MotorcycleRentalCenter - %s training
                 """;
     }
 
@@ -73,7 +73,7 @@ public class OfferMailService {
                 """
                                         
                         Best regards
-                        MOtorcycleRentalCenter Team
+                        MotorcycleRentalCenter Team
                         """;
         System.out.println(mes);
         return mes;

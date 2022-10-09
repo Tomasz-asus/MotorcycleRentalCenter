@@ -48,10 +48,10 @@ public class ModelsServiceTest {
         basicYamaha.assignInstructor(instructor);
         modelsRepo.save(basicYamaha);
         //when
-        modelService.assignUnavailableDaysByDuration(LocalDate.parse("2022-09-30"), basicYamaha.getDuration(), instructor.getName());
+        modelService.assignUnavailableDaysByDuration(LocalDate.parse("2022-10-09"), basicYamaha.getDuration(), instructor.getName());
         List<LocalDate> unavailableDays = instructorService.getUnavailableDays(instructor.getName());
         //then
-        assertThat(unavailableDays.get(1)).isEqualTo("2022-10-01");
+        assertThat(unavailableDays.get(0)).isEqualTo("2022-10-09");
 
     }
 

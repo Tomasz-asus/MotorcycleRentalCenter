@@ -19,7 +19,7 @@ public class MailConfiguration {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("cc@gmail.com");//TODO create email
+        mailSender.setUsername("educationsample00@gmail.com");
         mailSender.setPassword("Lorem Ipsum");//TODO setPassword
 
         Properties props = mailSender.getJavaMailProperties();
