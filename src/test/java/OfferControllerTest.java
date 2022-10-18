@@ -14,19 +14,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@ContextConfiguration
 @AutoConfigureMockMvc
 @Transactional
-@ContextConfiguration
 public class OfferControllerTest {
 
     @Autowired
@@ -48,7 +46,6 @@ public class OfferControllerTest {
     @Autowired
     Mails mails;
 
-
     @Test
     public void sendEmail() throws Exception {
         // given
@@ -57,7 +54,7 @@ public class OfferControllerTest {
         RentalDTO rentalDTO = new RentalDTO(LocalDate.of(2022, 10, 25),
                 LocalDate.of(2022, 10, 26));
 
-        OfferDTO offerDTO = new OfferDTO("cc@gmail.com",
+        OfferDTO offerDTO = new OfferDTO("educationsample00@gmail.com",
                 List.of(new ModelsDTO("BasicYamaha",
                 3,
                 6, "Lorem Ipsum",
@@ -66,17 +63,13 @@ public class OfferControllerTest {
                         new InstructorDTO("Tomi2", "bbb")),
                 List.of(rentalDTO))));
         String jsonString = objectMapper.writeValueAsString(offerDTO);
-
         // when
         this.mockMvc.perform(post("/offer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonString)).andExpect(status().isOk());
-
         // then
         assertThat(mails.containsMessageWith("BasicYamaha")).isTrue();
-
     }
-
     private void addModels(String instructorName) {
 
         Instructor instructor = new Instructor(instructorName, "Lorem Ipsum");
@@ -90,7 +83,5 @@ public class OfferControllerTest {
         producentRepo.save(yamaha);
         Category category1 = new Category("Sport", "Lorem Ipsum", List.of(yamaha));
         categoryRepo.save(category1);
-
     }
-
 }
