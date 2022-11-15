@@ -10,31 +10,33 @@ import java.util.List;
 public class OfferMailService {
 
 
-    public OfferMailService(MailSender emailSender) {
+    public OfferMailService(MailSender mailSender) {
 
-        this.emailSender = emailSender;
+        this.mailSender = mailSender;
     }
 
-    private final MailSender emailSender;
+    private final MailSender mailSender;
 
     public void prepareOffer(OfferDTO offerDTO) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("cc@gmail.com");//TODO
+        System.out.println(offerDTO.getModelsDTOSDTOS()+ "ble");
+        simpleMailMessage.setFrom("tomaszgbinance@gmail.pl");//TODO
         simpleMailMessage.setTo(offerDTO.getEmail());
         simpleMailMessage.setSubject(subject());
         simpleMailMessage.setText(message(offerDTO));
-        emailSender.send(simpleMailMessage);
+        mailSender.send(simpleMailMessage);
     }
 
     private String subject(){
         return """
-                Your offer from Inqoo - %s training
+                Your offer from MotorcycleRentalShop
                 """;
     }
 
     private String rentalMessage(List<ModelsDTO> models){
         String result = "";
         for (ModelsDTO model : models){
+            System.out.println(model + "ble");
             String instructor = "";
             String rentalStart = "";
             String rentalEnd = "";
@@ -73,7 +75,7 @@ public class OfferMailService {
                 """
                                         
                         Best regards
-                        MOtorcycleRentalCenter Team
+                        MotorcycleRentalCenter Team
                         """;
         System.out.println(mes);
         return mes;

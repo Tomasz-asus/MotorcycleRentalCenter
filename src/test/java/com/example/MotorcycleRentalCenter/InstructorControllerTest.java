@@ -1,3 +1,5 @@
+package com.example.MotorcycleRentalCenter;
+
 import com.example.MotorcycleRentalCenter.DTO.InstructorAssignmentDTO;
 import com.example.MotorcycleRentalCenter.DTO.RentalDTO;
 import com.example.MotorcycleRentalCenter.models.Instructor;
@@ -21,9 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = InstructorControllerTest.class)
-@AutoConfigureMockMvc
 @Transactional
+@AutoConfigureMockMvc
+@SpringBootTest
 
 public class InstructorControllerTest {
 
@@ -101,8 +103,8 @@ public class InstructorControllerTest {
         String jsonString = objectMapper.writeValueAsString(instructorAssignmentDTO);
         // and
         this.mockMvc.perform(post("/category/instructorAssignment")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonString));
         // when
         this.mockMvc.perform(post("/category/instructorAssignment")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -125,14 +127,18 @@ public class InstructorControllerTest {
         String jsonString = objectMapper.writeValueAsString(rentalDTO);
 
         // when
-        this.mockMvc.perform(post("/instuctor/unavailableDaysAssign/Andrzej")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonString))
+        this.mockMvc.perform(post("/instructors/unavailableDaysAssign/Tomi")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonString))
                 .andExpect(status().isOk());
 
         // then
         Optional<Instructor> instructor = instructorRepo.findByName("Tomi");
-        assertThat(instructor.map(m -> m.getUnavailableDays().size()).get()).isEqualTo(2);
+        assertThat(instructor
+                .map(m -> m.getUnavailableDays()
+                        .size())
+                .get())
+                .isEqualTo(2);
 
     }
 
